@@ -10,6 +10,3 @@ def serve_image():
     img_buffer = getImage(query)
     meme = generate_meme(img_buffer, "NO MORE", query.upper().replace("_", " "))
     return send_file(BytesIO(meme), mimetype='image/jpeg')
-
-if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0")
