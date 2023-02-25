@@ -8,7 +8,7 @@ def generate_meme(image_bytes, top_text, bottom_text):
 
     # Set up font and text properties
     scale = int(img.size[1]/10)
-    font = ImageFont.truetype("impact.ttf", scale)
+    font = ImageFont.truetype("Impact.ttf", scale)
     outline_width = int(scale/15)
     draw = ImageDraw.Draw(img)
     font_color = (255, 255, 255)
