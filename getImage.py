@@ -7,7 +7,7 @@ endpoint = 'https://api.bing.microsoft.com/v7.0' + "/images/search"
 mkt = 'en-US'
 headers = { 'Ocp-Apim-Subscription-Key': subscription_key }
 
-requests_cache.install_cache('api_cache', expire_after=3600)
+requests_cache.install_cache('api_cache', expire_after=604800)
 
 
 

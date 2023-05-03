@@ -1,24 +1,69 @@
+<!-- Thanks to Dion for live generator idea -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- HTML Codes by Quackit.com -->
-<title>
-"No More" meme generator</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="meme, meme generator, no more fortnite">
-<meta name="description" content="A website to generate No More memes">
-<style>
-body {background-color:#696969;background-repeat:no-repeat;background-position:top left;background-attachment:fixed;}
-h1{font-family:Verdana, sans-serif;color:#ffffff;background-color:#696969;}
-p {font-family:Verdana, sans-serif;font-size:14px;font-style:normal;font-weight:normal;color:#ffffff;background-color:#696969;}
-</style>
+  <meta charset="utf-8">
+  <title>No More Meme Generator</title>
+  <meta name="title" content="No More Meme Generator">
+  <meta name="description" content="To use: https://nomore.pablito.tech/your_text_here" />
+  <style>
+    body {
+      background-color: #2d2d2d;
+      font-family: "Helvetica", sans-serif;
+      color: white;
+      font-size:30px}
+    h1 {font-size:60px;}
+    h2 {font-size:40px;}
+  </style>
 </head>
-<body>
-<h1>No More meme generator</h1>
-<p>This generates images from the "No More Fortnite" meme. </p>
-<p></p>
-<p>To use, in a browser or messaging service type the URL:  https://nomore.pablito.tech?image=Fortnite</p>
-<p></p>
-<p>Make sure to replace Fortnite with whatever image / word you want. Mature results are filtered.</p>
+<body onload="document.getElementById('output').innerText = '​'">
+
+<center><h1>NO MORE GENERATOR</h1>
+
+  <div id="input-container" style="display: flex; align-items: center; border-radius: 4px; overflow: hidden; width: 50%;">
+    <input type="text" id="input" placeholder="Text here" style="margin-left:auto; width: 50%; padding: 10px; border: none; outline: none; background-color: white; font-size: 24px;">
+    <button id="button" onclick="generate_output()" style="margin-right:auto; padding: 10px; border: none; background-color: #ee93e7; font-size: 24px;">Generate!</button>
+  </div>
+  
+  <h2 id="output" style="margin-top:3%; cursor: default; pointer-events: default; display: inline-block;" onclick="copyToClipboard(this);" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';" innerText="Wow"></h2></h2>
+  <br>
+  <div style="background-color:#aa50ea; border-radius: 4px; height: 10px; width: 80%;"></div>
+
+
+<h1>TIPS:</h1>
+<p>You can use a _ character as a space.</p>
+<p>Avoid special characters if possible.</p>
+
+</center>
+<script>
+  const input = document.getElementById("input");
+  const button = document.getElementById("button");
+  const output = document.getElementById("output");
+
+  function generate_output() {
+    const text = input.value;
+    const url = window.location.origin;
+    let outputText = `${url}/${text}`;
+    outputText = outputText.replace(/ /g, "_")
+    output.innerText = outputText;
+  };
+
+  function copyToClipboard(element) {
+    text = element.textContent
+    navigator.clipboard.writeText(text);
+    
+    element.innerText = "Copied!";
+  setTimeout(() => { element.innerText = text;}, 2000); // Change back after 2 seconds
+  }
+
+  input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    button.click();}
+  }); 
+
+
+</script>
+
+
 </body>
 </html>
