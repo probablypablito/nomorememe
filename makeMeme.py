@@ -4,7 +4,12 @@ import io, textwrap
 def generate_meme(image_bytes, top_text, bottom_text):
     # Load the image
     img = Image.open(io.BytesIO(image_bytes))
-    img = img.convert('RGB')
+
+    # If the request isi an error then we need transparency
+    if bottom_text == ("[IMAGE NOT FOUND]"):
+        img = img.convert('RGBA')
+    else:
+        img = img.convert('RGB')
 
     # Set up font and text properties
     scale = int(img.size[1]/10)
@@ -14,7 +19,8 @@ def generate_meme(image_bytes, top_text, bottom_text):
     font_color = (255, 255, 255)
 
     # Draw the top text with an outline
-    textwidth, textheight = draw.textsize(top_text, font=font)
+    textwidth = draw.textlength(top_text, font=font)
+    textheight = scale
     x = (img.width - textwidth) / 2
     y = 0
     draw.text((x, y), top_text, font=font, fill=font_color)
@@ -27,7 +33,8 @@ def generate_meme(image_bytes, top_text, bottom_text):
     # Draw the wrapped bottom text with an outline
     wrapped_text_size = []
     for line in wrapped_text:
-        line_width, line_height = draw.textsize(line, font=font)
+        line_width = draw.textlength(line, font=font)
+        line_height = scale
         wrapped_text_size.append((line_width, line_height))
     
     total_height = sum([size[1] for size in wrapped_text_size])
@@ -40,7 +47,11 @@ def generate_meme(image_bytes, top_text, bottom_text):
 
     # Save the modified image to a bytes object
     img_byte_array = io.BytesIO()
-    img.save(img_byte_array, format='JPEG')
+
+    # Since error has transparency, we use
+    if bottom_text == ("[IMAGE NOT FOUND]"):
+        img.save(img_byte_array, format='PNG')
+
     img_byte_array.seek(0)
 
     # Return the image as bytes
