@@ -1,8 +1,7 @@
 import os
 import json
-import requests,requests_cache
 import httpx
-
+import httpx_cache
 
 
 subscription_key = os.environ['subscription_key']
@@ -10,13 +9,11 @@ endpoint = 'https://api.bing.microsoft.com/v7.0' + "/images/search"
 mkt = 'en-US'
 headers = { 'Ocp-Apim-Subscription-Key': subscription_key }
 
-requests_cache.install_cache('api_cache', expire_after=604800)
-
 async def getImage(query):
 
     params = { 'q': query, 'mkt': mkt, 'count': 1 }
 
-    async with httpx.AsyncClient() as client:
+    async with httpx_cache.AsyncClient() as client:
         try:
             response = await client.get(endpoint, params=params, headers=headers)
 

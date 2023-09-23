@@ -1,4 +1,5 @@
-flask
+quart
 pillow
-waitress
+hypercorn
 httpx
+httpx-cache

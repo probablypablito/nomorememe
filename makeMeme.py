@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import io, textwrap
 
-def generate_meme(image_bytes, top_text, bottom_text):
+async def generate_meme(image_bytes, top_text, bottom_text):
     # Load the image
     img = Image.open(io.BytesIO(image_bytes))
 
@@ -51,6 +51,8 @@ def generate_meme(image_bytes, top_text, bottom_text):
     # Since error has transparency, we use
     if bottom_text == ("[IMAGE NOT FOUND]"):
         img.save(img_byte_array, format='PNG')
+    else:
+        img.save(img_byte_array, format='JPEG')
 
     img_byte_array.seek(0)
 
