@@ -9,4 +9,4 @@ COPY . .
 RUN mkdir -p /usr/share/fonts/truetype/
 COPY ./Impact.ttf /usr/share/fonts/truetype/Impact.ttf
 
-CMD waitress-serve --host 0.0.0.0 --port 8000 web:app
+CMD hypercorn -b 0.0.0.0:80 web:app
