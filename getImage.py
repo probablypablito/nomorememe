@@ -13,7 +13,7 @@ async def getImage(query):
 
     params = { 'q': query, 'mkt': mkt, 'count': 1 }
 
-    async with httpx_cache.AsyncClient() as client:
+    async with httpx_cache.AsyncClient(follow_redirects=True) as client:
         try:
             response = await client.get(endpoint, params=params, headers=headers)
 

@@ -4,12 +4,7 @@ import io, textwrap
 async def generate_meme(image_bytes, top_text, bottom_text):
     # Load the image
     img = Image.open(io.BytesIO(image_bytes))
-
-    # If the request isi an error then we need transparency
-    if bottom_text == ("[IMAGE NOT FOUND]"):
-        img = img.convert('RGBA')
-    else:
-        img = img.convert('RGB')
+    img = img.convert('RGB')
 
     # Set up font and text properties
     scale = int(img.size[1]/10)
@@ -47,13 +42,7 @@ async def generate_meme(image_bytes, top_text, bottom_text):
 
     # Save the modified image to a bytes object
     img_byte_array = io.BytesIO()
-
-    # Since error has transparency, we use
-    if bottom_text == ("[IMAGE NOT FOUND]"):
-        img.save(img_byte_array, format='PNG')
-    else:
-        img.save(img_byte_array, format='JPEG')
-
+    img.save(img_byte_array, format='JPEG')
     img_byte_array.seek(0)
 
     # Return the image as bytes

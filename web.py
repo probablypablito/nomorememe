@@ -23,9 +23,10 @@ async def serve_image(path):
     try:
         img_buffer = await getImage(query)
         meme = await generate_meme(img_buffer, "NO MORE", image)
-    except:
-        logo = open("logo.png", "rb")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        logo = open("error.png", "rb")
         logo_buffer = logo.read()
         logo.close()
-        meme = await generate_meme(logo_buffer, "", "[IMAGE NOT FOUND]")
+        meme = logo_buffer
     return await send_file(BytesIO(meme), mimetype='image/jpeg')
